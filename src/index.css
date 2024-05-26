@@ -1,0 +1,256 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  font-family: Archivo, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  user-select: none;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+/* header */
+.navigation:hover {
+  color: #77dada;
+}
+
+.header-wapper {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  z-index: 20;
+  border-bottom: 2px solid #eaecf0;
+}
+
+.containerr {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto;
+}
+
+.active {
+  border-bottom: 3px solid #77dada;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  color: #77dada;
+}
+
+/* home */
+.bottom {
+  padding: 14px 16px;
+  color: #0e4f4f;
+  white-space: nowrap;
+  border-radius: 100px;
+  box-shadow: var(--tw-shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Home banner  */
+.banner {
+  position: relative;
+  margin: auto;
+  width: calc(100vw - 220px);
+  /* width:100%; */
+  height: 50vw;
+  /* max-width: 1392px; */
+  /* max-height:784px; */
+}
+
+.home-bn-video {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  /* transform:translateX(-50%); */
+  border-radius: 24px;
+}
+
+.searchBox {
+  position: absolute;
+  bottom: +100px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 15px 24px 24px;
+  width: 1008px;
+  height: 200px;
+  margin: auto;
+  background-color: rgba(250, 250, 250, 0.3) !important ;
+}
+
+.box {
+  border-radius: 32px;
+  border: 2px solid var(--tw-gray-200, #eaecf0);
+  background: var(--tw-base, #fff);
+  box-shadow: 0 2px 4px #1018280d;
+}
+
+.search {
+  position: relative;
+  flex: 1 0;
+}
+
+.input-group {
+  position: relative;
+  border-radius: 8px;
+  border: 1px solid #acb3c0;
+  box-shadow: var(--tw-shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-group:focus-within {
+  border: 2px solid rgb(79, 70, 229);
+}
+.input-group:hover {
+  border-color: rgb(79, 70, 229);
+}
+
+/* hotel */
+
+.section-bg {
+  background-image: url(https://mixivivu.com/section-background.png);
+  background-repeat: repeat;
+}
+
+.searchHotel {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 40px 24px 24px;
+  width: 1008px;
+  height: 252px;
+  margin: auto;
+}
+
+/* footer */
+.footer {
+  padding: 64px 0 48px;
+  display: flex;
+  gap: 64px;
+  width: min(1216px, 100%);
+  align-items: center;
+}
+.first-child {
+  width: max(25%, 320px);
+}
+
+.filter-result {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.option {
+  display: flex;
+  height: 13px;
+}
+
+.option:hover {
+  background-color: var(--tw-primary);
+  box-shadow: 0px 0px 12px var(--tw-primary);
+}
+
+.utilitie {
+  border-radius: 16px;
+  width: -moz-fit-content;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* things To Do */
+
+.infoBlog {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 1s;
+  z-index: 99;
+}
+
+.modal_overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal_body {
+  background-color: white;
+  border-radius: 10px;
+  margin: auto;
+  z-index: 9999;
+  box-shadow: 3px 3px 10px 1px rgba(0, 0, 0, 0.2);
+}
+/* Modal-Signup */
+.auth-form {
+  max-width: 600px;
+  min-height: 200px;
+  width: 432px;
+}
+
+.auth-form_btn {
+  font-size: 18px;
+  line-height: 20px;
+  font-weight: 600;
+  color: #77dada;
+  cursor: pointer;
+}
+
+/* Manager -> listUser */
+table,
+thead,
+tbody {
+  border-bottom: 1px solid #b4bac6;
+
+  th {
+    padding: 10px 12px;
+  }
+  td {
+    padding: 12px 14px;
+  }
+}
+
+.buttom_crud {
+  border-radius: 5px;
+}
+
+.calenderInput {
+  font-size: 16px;
+  font-family: Archivo, sans-serif;
+  font-weight: 500;
+}
+
+.siderbar {
+  min-height: calc(100vh - 99px);
+}
+
+@media only screen and (max-width: 1280px) {
+  .container {
+    padding: 0 8px;
+  }
+}

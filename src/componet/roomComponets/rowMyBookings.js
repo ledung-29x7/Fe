@@ -20,14 +20,14 @@ function RowMyBookings({booking}) {
     }
 
     return(
-        <tbody className=" text-gray-500 bg-white h-11">
+        <tbody className=" odd:bg-white text-gray-600 text-sm odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
             <td>{infoBookings?.customerName}</td>
             <td>{infoBookings?.hotelName}</td>
             <td>{infoBookings?.checkinDate}</td>
             <td>{infoBookings?.checkoutDate}</td>
             <td>{infoBookings?.totalPrice}</td>
             <td className=" text-center">
-                <button onClick={handleOpenDetail}  className="buttom_crud w-14 h-8 text-sky-600 text-2xl ">
+                <button onClick={handleOpenDetail}  className="buttom_crud w-14 h-8 text-sky-600 text-xl ">
                     <FontAwesomeIcon icon="fa-solid fa-circle-info" />
                 </button>
             </td>

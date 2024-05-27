@@ -92,8 +92,9 @@ function HeaderUp() {
         await apis.LogOut().then((res) => {
           if (res.status === 200) {
             deleteCookie("token");
+            scrooltotop()
             checkLoggedIn();
-            
+            navigate("/")
             dispatch(actions.CheckLogin(false));
           }
         });
@@ -183,7 +184,7 @@ function HeaderUp() {
                 <div class="font-medium truncate"></div>
               </div>
               <div class="py-1">
-                <a onClick={handleLogout} href="/" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                <button onClick={handleLogout} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</button>
               </div>
             </div>
           </div>

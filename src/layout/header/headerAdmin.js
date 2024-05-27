@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useStore } from "../../store/contexts";
@@ -10,6 +10,8 @@ import SignUp from "../user/signUp";
 import Login from "../user/logIn";
 
 function HeaderAdmin() {
+
+    const navigate = useNavigate()
     const [isShowingSignUp, setIsShowingSignUp] = useState(false);
     const [isShowingLogin, setIsShowingLogin] = useState(false);
     const [isChecking, setIsChecking] = useState(false);
@@ -23,10 +25,10 @@ function HeaderAdmin() {
 
     const scrooltotop = () => {
         return window.scrollTo({
-          top: 0,
-          behavior: `smooth`,
+            top: 0,
+            behavior: `smooth`,
         });
-      };
+    };
 
     // hủy Cookie
     function deleteCookie(name) {
@@ -93,7 +95,9 @@ function HeaderAdmin() {
                 await apis.LogOut().then((res) => {
                     if (res.status === 200) {
                         deleteCookie("token");
-                        checkLoggedIn()
+                        scrooltotop()
+                        checkLoggedIn();
+                        navigate("/")
                         dispatch(actions.CheckLogin(false))
                     }
                 });

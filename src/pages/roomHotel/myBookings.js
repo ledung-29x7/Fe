@@ -6,6 +6,8 @@ import TableBooked from "../../componet/roomComponets/tableBooked";
 function MyBookings() {
   const [infoBooked, setInfoBooked] = useState([]);
   const [checkEmty, setCheckEmty] = useState(false);
+  const [errors, setErrors] = useState("");
+  const [showError, setShowError] = useState(false);
 
   useEffect(() => {
     const FetchData = async () => {
@@ -13,13 +15,22 @@ function MyBookings() {
         const response = await apis.HistoryBookings("customer/bookings");
         setInfoBooked(response);
       } catch (error) {
-        console.log(error);
+        if (error.response.status === 403) {
+          setErrors("Vui lòng đăng nhập tài khoản custumer để xem danh sách")
+        }
+        setShowError(true)
       }
     };
     FetchData();
   }, []);
 
-  console.log(infoBooked);
+  useEffect(() => {
+    setTimeout(() => {
+      setShowError(false)
+    }, 8000);
+
+  },[showError])
+
   useEffect(() => {
     if (infoBooked?.length > 0) {
       setCheckEmty(true);
@@ -29,7 +40,7 @@ function MyBookings() {
   return (
     <div className="bg-[#CDD0D1]/[.44] ">
       <div className=" flex m-auto py-8 w-[1200px] min-h-[720px]">
-        <div className=" px-3 flex-1">
+        <div className=" px-3 flex-1 bg-white py-5 rounded-md shadow">
           {/* <h1
             dir="auto"
             role="heading"
@@ -47,8 +58,8 @@ function MyBookings() {
                 rotation={180}
               />
             </div>
-            <div className=" group-hover:text-gray-300 text-white  ">
-              Tất cả phòng
+            <div className=" group-hover:text-gray-300 text-sm font-semibold text-white  ">
+              Tất cả danh sách booking
             </div>
           </a>
         </div>
@@ -106,6 +117,13 @@ function MyBookings() {
             </div>
           </div>
         )}
+        {showError ?
+          <div className=" fixed top-24 right-6 w-80 text-center bg-white shadow-md">
+            <div className="w-full h-1 bg-red-500"></div>
+            <div className=" py-4 text-xs px-4 font-semibold text-red-400 ">{errors}</div>
+          </div>
+          :
+          null}
       </div>
     </div>
   );

@@ -10,7 +10,6 @@ function EditManagerHotel({rooms}) {
     
     const [, dispatch] = useStore();
     const [editRoom, setEditRoom] = useState({});
-
     const [valueEdit, setValueEdit] = useState({
         ...rooms,
         pricePerNight: 0,

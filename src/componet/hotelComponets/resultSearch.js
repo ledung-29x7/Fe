@@ -29,21 +29,11 @@ function ResultSearch({ resul }) {
     (ob) => ob.roomType === "SINGLE"
   )?.pricePerNight;
 
-  // useEffect(()=> {
-  //     const FetchData = async() => {
-  //         try {
-  //             const response = await apis.GetImage(idImage)
-  //             console.log(response)
-  //         } catch (error) {
-  //             console.log(error)
-  //         }
-  //     }
-  //     FetchData();
-  // },[idImage])
+  
   return (
     <div
       className=" h-72 flex gap-5 box cursor-pointer items-center"
-      onClick={() => navigate(`/hotel/room/${resul.id}`)}
+      onClick={() => (navigate(`/hotel/room/${resul.id}`),scrooltotop())}
     >
       {/* image Hotel */}
       <div className=" p-4 static">

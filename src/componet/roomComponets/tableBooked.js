@@ -7,7 +7,7 @@ function TableBooked({bookings}) {
             <div className=" ">
                 <div className=" flex justify-between items-center">
                     <div className="flex flex-col gap-5">
-                        <h4 className=" font-semibold text-2xl text-gray-700 w-80">
+                        <h4 className=" font-semibold text-xl text-gray-700">
                             Lịch sử booking
                         </h4>
                         
@@ -15,13 +15,13 @@ function TableBooked({bookings}) {
                 </div>
                 <div className=" mt-5 relative">
                     <table className=" w-full rounded-md overflow-hidden ">
-                        <thead className=" bg-[#0264c8] text-white text-left  h-12">
+                        <thead className=" bg-[#0264c8] text-white text-left text-sm  h-12">
                             <th>Tên người dùng</th>
                             <th>Tên khách sạn</th>
                             <th>Ngày check in</th>
                             <th>Ngày check out</th>
                             <th>Tổng tiền</th>
-                            <th>Details</th>
+                            <th>Chi tiết</th>
                         </thead>
                         {bookings?.map((dt)=>
                             <RowMyBookings

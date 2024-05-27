@@ -11,6 +11,8 @@ import Delete from "../../admins/listUser/Delete";
 function ListUser() {
     const navigate = useNavigate();
     const [isShowDelete, setIsShowDelete] = useState(false);
+    const [errors, setErrors] = useState("");
+    const [showError, setShowError] = useState(false);
     const [rooms, setRooms] = useState([]);
     const [state, dispatch] = useStore();
     const { isDelete, isEdit } = state;
@@ -27,11 +29,21 @@ function ListUser() {
                 const response = await apis.getManager("hotels")
                 setRooms(response.data)
             } catch (error) {
-                console.log(error)
+                if (error.response.status === 403) {
+                    setErrors("Vui lòng đăng nhập tài khoản manager để xem danh sách")
+                }
+                setShowError(true)
             }
         }
         FetchData()
     }, [])
+
+    useEffect(() => {
+        setTimeout(() => {
+            setShowError(false)
+        }, 8000);
+
+    }, [showError])
 
 
     return (
@@ -83,6 +95,14 @@ function ListUser() {
                 </div>
                 : null
             }
+
+            {showError ?
+                <div className=" fixed top-24 right-6 w-80 text-center bg-neutral-50 shadow">
+                    <div className="w-full h-1 bg-red-500"></div>
+                    <div className=" py-4 text-xs px-4 font-semibold text-red-400 ">{errors}</div>
+                </div>
+                :
+                null}
         </div>
     );
 }

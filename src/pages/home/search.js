@@ -13,14 +13,14 @@ function Search({setSearch}) {
     const [, dispatch] = useStore();
 
     const date = new Date();
-    var setDateout = date.getFullYear()+"-"+ (date.getMonth()+1) + "-" + (date.getDate() + 4);
-
+    var setDateout = date.getFullYear()+"-"+ (date.getMonth()+1) + "-" + (date.getDate()+1);
+    
     const [searchValue, setSearchValue] = useState({
         city: setSearch?.city || "" ,
         checkinDate: new Date(),
-        checkoutDate: setDateout 
+        checkoutDate: setDateout
     })
-
+    console.log(searchValue)
     
     const { RangePicker } = DatePicker;
     const disabledDate = (current) => {
@@ -90,6 +90,7 @@ function Search({setSearch}) {
         const date = new Date();
         var setDatein = date.getFullYear()+"-"+ (date.getMonth() + 1) + "-" + date.getDate();
         setSearchValue({
+            ...searchValue,
             checkinDate:dateFormatAux(setDatein),
             checkoutDate:dateFormatAux(setDateout)
         })

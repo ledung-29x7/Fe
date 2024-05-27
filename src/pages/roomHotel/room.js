@@ -15,11 +15,14 @@ import InfoRoom from "../../componet/roomComponets/infoRoom";
 import DetailRoom from "../../componet/roomComponets/detailRoom";
 
 function Room() {
+    
     const { id } = useParams()
     const [state, dispatch] = useStore();
     const [showInfoRoom, setShowInfoRoom] = useState(false);
+    const [showError, setShowError] = useState(false);
     const [imagesHotel, setImagesHotel] = useState([]);
-    const [dataRoom, setDataRoom] = useState([])
+    const [dataRoom, setDataRoom] = useState([]);
+    const [errors, setErrors] = useState("");
     const [total, setTotal] = useState(0);
     const navigate = useNavigate();
     const {
@@ -139,7 +142,8 @@ function Room() {
     const handleOpenBooking = () => {
         const FetchData = async () => {
             try {
-                await apis.Booking(bookingInfo)
+                if (bookingInfo.amount > 0) {
+                    await apis.Booking(bookingInfo)
                     .then(res => {
                         if (res.status === 200) {
                             dispatch(actions.getInfoBooking({
@@ -150,14 +154,30 @@ function Room() {
                             navigate("/pay")
                         }
                     })
+                }else {
+                    setShowError(true)
+                    setErrors("Hãy lựa chọn phòng để đặt")
+                }
+
+
             } catch (error) {
                 console.log(error)
+                if (error.response.status === 403) {
+                    setErrors("Vui lòng đăng nhập để đặt phòng")
+                }
+                setShowError(true)
             }
         }
         FetchData();
     }
 
-    // Slide 
+    // ShowError
+    useEffect(() => {
+        setTimeout(() => {
+            setShowError(false)
+        }, 8000);
+
+    }, [showError])
 
 
     // when click
@@ -260,7 +280,8 @@ function Room() {
                                             {format.FormatNumber(total)} VNđ
                                         </span>
                                     </div>
-                                    <button className=" rounded-md text-white px-6 py-2 bg-[#77dada]" onClick={handleOpenBooking}>
+                                    <button className=" ease-in-out duration-200 rounded-md text-white px-6 py-2 bg-[#77dada] active:scale-95 hover:bg-[#5aa4a4]" 
+                                    onClick={handleOpenBooking}>
                                         <div className="text-sm font-semibold">Đặt ngay</div>
                                         <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
                                     </button>
@@ -284,6 +305,15 @@ function Room() {
                 </div>
                 : null
             }
+
+
+            {showError ?
+                <div className=" fixed top-24 right-6 w-80 text-center bg-neutral-50 shadow">
+                    <div className="w-full h-1 bg-red-600"></div>
+                    <div className=" py-4 text-sm px-4 font-semibold text-red-400 ">{errors}</div>
+                </div>
+                :
+                null}
 
         </div>
     );

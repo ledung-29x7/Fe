@@ -12,7 +12,13 @@ function Hotel() {
   const { getSearch } = state;
   const [searchResult, setSearchResult] = useState([]);
 
-  console.log(getSearch);
+  
+  const scrooltotop = () => {
+    return window.scrollTo({
+        top: 0,
+        behavior: `smooth`,
+    });
+};
 
   useEffect(() => {
     if (getSearch !== null) {

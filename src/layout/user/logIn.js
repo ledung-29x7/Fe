@@ -39,7 +39,7 @@ function Login() {
             dispatch(actions.ModalLogin(false));
             switch (res.data.role) {
               case "ADMIN":
-                return navigate("/admin/");
+                return navigate("/admin/listUser");
               case "MANAGER":
                 return navigate("/manager/myHotels");
               case "CUSTOMER":

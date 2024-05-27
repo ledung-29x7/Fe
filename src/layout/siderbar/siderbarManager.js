@@ -2,7 +2,8 @@ import MenuItem from "./menuItem";
 
 function SiderbarManager() {
   return (
-    <div className=" flex flex-col gap-6 pt-10 ">
+    <div className="  font-medium">
+      <div className=" flex flex-col gap-10 pt-10  w-full ">
       <MenuItem
         title={"Quản lý khách sạn"}
         icon={"fa-solid fa-hotel"}
@@ -13,6 +14,7 @@ function SiderbarManager() {
         icon={"fa-solid fa-calendar-days"}
         to={"/manager/manageBookings"}
       />
+    </div>
     </div>
   );
 }

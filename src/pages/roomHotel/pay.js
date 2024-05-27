@@ -45,12 +45,8 @@ function Pay() {
 
     return (
         <div className="flex flex-col containerr px-8 ">
-            <div className=" flex py-6 border-b font-bold">
-                <button className=" hover:text-cyan-600 flex-1">Lựa chọn của bạn</button>
-                <button className=" hover:text-cyan-600 flex-1">Chi tiết đầy đủ</button>
-            </div>
 
-            <div className="py-5 flex">
+            <div className="py-5 flex sm:my-12">
                 {/* info date booking */}
                 <div className="flex flex-col gap-3 flex-1 px-3 ">
                     <div className="border p-4 rounded-lg flex flex-col gap-3 bg-gray-50">

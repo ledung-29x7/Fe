@@ -1,19 +1,28 @@
 import { useNavigate } from "react-router-dom";
+import { useStore } from "../../../store/contexts";
+import { actions } from "../../../store/action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function RowBooking({booking}){
-    const handleOpenDetail = () =>{
 
+    const navigate = useNavigate();
+    const [,dispatch] = useStore();
+
+    const handleOpenDetail = () =>{
+        navigate("/admin/listBooking/detail")
+        dispatch(actions.getIdEND(booking.id))
     }
 
     return(
-        <tbody className=" text-gray-600 h-11">
-            <td className=" text-center">{booking.id}</td>
-            <td>{booking.customer}</td>
-            <td>{booking.nameHotel}</td>
-            <td>{booking.bookingDate}</td>
-            <td>{booking.price}</td>
-            <td className=" text-center">
-                <button onClick={handleOpenDetail}  className="buttom_crud w-14 h-8 bg-blue-500 ">Details</button>
+        <tbody className=" odd:bg-white text-gray-600 text-sm odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+            <td>{booking?.customerName}</td>
+            <td>{booking?.hotelName}</td>
+            <td>{booking?.bookingDate}</td>
+            <td>{booking?.totalPrice}</td>
+            <td className="">
+            <button onClick={handleOpenDetail} className=" pl-3 text-sky-600 text-2xl ">
+                    <FontAwesomeIcon icon="fa-solid fa-circle-info" />
+                </button>
             </td>
         </tbody>
     );

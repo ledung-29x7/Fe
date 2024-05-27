@@ -3,15 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function MenuItem({ title, to, icon }) {
   return (
-    <div className=" flex alitem">
-      <NavLink className="menu-item gap-4 flex " to={to}>
-        <div className="decor"></div>
+    <div className=" flex pl-5">
+      <NavLink className=" flex items-center px-1 pb-2 justify-between gap-4 text-[#7a8699] " to={to}>
         <FontAwesomeIcon
-          style={{ color: "#7a8699" }}
-          size="md"
+          size="lg"
           icon={icon}
-        ></FontAwesomeIcon>
-        <span className=" font-bold">{title}</span>
+        />
+        <span className=" text-sm font-semibold">{title}</span>
       </NavLink>
     </div>
   );

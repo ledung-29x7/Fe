@@ -23,9 +23,11 @@ code {
 .header-wapper {
   position: sticky;
   top: 0;
-  background-color: #fff;
+  left: 0;
+  right: 0;
   z-index: 20;
-  border-bottom: 2px solid #eaecf0;
+  background: #fff;
+  border-bottom: 1px solid #eaecf0;
 }
 
 .containerr {
@@ -38,16 +40,15 @@ code {
   border-bottom: 3px solid #77dada;
   height: 100%;
   display: flex;
-  align-items: center;
   color: #77dada;
 }
 
 /* home */
 .bottom {
   padding: 14px 16px;
-  color: #0e4f4f;
+  color: #126060;
   white-space: nowrap;
-  border-radius: 100px;
+  border-radius: 12px;
   box-shadow: var(--tw-shadow);
   display: flex;
   align-items: center;
@@ -189,14 +190,14 @@ code {
   right: 0;
   bottom: 0;
   transition: 1s;
-  z-index: 99;
+  z-index: 100;
 }
 
 .modal_overlay {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal_body {
@@ -225,13 +226,13 @@ code {
 table,
 thead,
 tbody {
-  border-bottom: 1px solid #b4bac6;
+  border-bottom: 1px solid #c9cacb;
 
   th {
-    padding: 10px 12px;
+    padding: 8px 12px;
   }
   td {
-    padding: 12px 14px;
+    padding: 8px 14px;
   }
 }
 
@@ -245,9 +246,19 @@ tbody {
   font-weight: 500;
 }
 
+/* head admin */
 .siderbar {
-  min-height: calc(100vh - 99px);
+  height: calc(100vh - 99px);
 }
+
+.shield {
+  position: absolute;
+  background: rgba(255,255, 255, 0.01);
+  z-index: 1000;
+}
+
+/* room  */
+
 
 @media only screen and (max-width: 1280px) {
   .container {

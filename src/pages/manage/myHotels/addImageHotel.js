@@ -7,7 +7,8 @@ import * as apis from "../../../apis";
 function AddImageHotel() {
 
     const [selectedImage, setSelectedImage] = useState(null);
-    const [susserfull, setSusserfull] = useState(false)
+    const [susserfull, setSusserfull] = useState(false);
+    const [readerImg, setReaderImg] = useState([]);
     const navigate = useNavigate()
     const [state, dispatch] = useStore();
     const { isSuccessfull } = state
@@ -17,6 +18,14 @@ function AddImageHotel() {
 
     };
 
+    useEffect(() => {
+        var imgUpload = []
+        for (let i = 0; i < selectedImage?.length; i++) {
+            imgUpload.push(URL.createObjectURL(selectedImage[i]));
+        }
+        setReaderImg(imgUpload)
+
+    }, [selectedImage])
 
     useEffect(() => {
         setSusserfull(isSuccessfull)
@@ -58,7 +67,7 @@ function AddImageHotel() {
 
     return (
         <div className="flex justify-center max-w-7xl m-auto bg-gray-50 w-full ">
-            <div className=" py-32 flex  flex-col items-center w-full px-3 ">
+            <div className=" flex  flex-col items-center w-full px-3 ">
             
                 {susserfull ?
                     <div className=" rounded-b-md fixed top-[96px] bg-green-600 text-white py-3 px-9 flex justify-center ">

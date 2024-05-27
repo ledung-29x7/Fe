@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useStore } from "../../store/contexts";
 import { actions, actionsGetData } from "../../store/action";
 import { useEffect, useState } from "react";
-import Room from "../../pages/roomHotel/room";
+import { format } from "../logic";
 
 function InfoRoom({ dataInfoRoom, max }) {
   const [, dispath] = useStore();
@@ -11,15 +11,14 @@ function InfoRoom({ dataInfoRoom, max }) {
   const [singleRoomCount, setSingleRoomCount] = useState(0);
   const [doubleRoomCount, setDoubleRoomCount] = useState(0);
   const [familyRoomCount, setFamilyRoomCount] = useState(0);
+  const [imageRoom, setImageRoom] = useState("");
+
 
   const handleDetailRoom = () => {
     dispath(actions.ModalInforRoom(true));
     dispath(actions.GetIdRoom(dataInfoRoom.id));
   };
 
-  const handleFormBooking = () => {
-    dispath(actions.ModalFormBooking(true));
-  };
 
   const handlePlusCount = () => {
     switch (dataInfoRoom?.roomType) {
@@ -68,38 +67,35 @@ function InfoRoom({ dataInfoRoom, max }) {
 
   useEffect(() => {
     var singlePrice = dataInfoRoom?.pricePerNight * singleRoomCount;
-    dispath(actionsGetData.TotalPriceS(singlePrice));
-    dispath(
-      actionsGetData.CountNType({
+
+      dispath(actionsGetData.TotalPriceS(singlePrice));
+      dispath(actionsGetData.CountNType({
         roomType: "SINGLE",
         count: singleRoomCount,
-      })
-    );
+      }))
+    
+
   }, [singleRoomCount]);
 
-  useEffect(() => {
+  useEffect(()=> {
     var doublePrice = dataInfoRoom?.pricePerNight * doubleRoomCount;
     dispath(actionsGetData.TotalPriceD(doublePrice));
-    dispath(
-      actionsGetData.CountNType({
+      dispath(actionsGetData.CountNTypeDou({
         roomType: "DOUBLE",
         count: doubleRoomCount,
-      })
-    );
-  }, [doubleRoomCount]);
+      }))
+  },[doubleRoomCount])
 
-  useEffect(() => {
-    var familyPrice = dataInfoRoom?.pricePerNight * familyRoomCount;
+  useEffect(()=> {
+    let familyPrice = dataInfoRoom?.pricePerNight * familyRoomCount;
+
     dispath(actionsGetData.TotalPriceF(familyPrice));
-    dispath(
-      actionsGetData.CountNType({
+      dispath(actionsGetData.CountNTypeFami({
         roomType: "FAMILY",
         count: familyRoomCount,
-      })
-    );
-  }, [familyRoomCount]);
+      }))
+  },[familyRoomCount])
 
-  const [imageRoom, setImageRoom] = useState("");
 
   useEffect(() => {
     function displayImages(imageDTOs) {
@@ -111,31 +107,24 @@ function InfoRoom({ dataInfoRoom, max }) {
     }
     displayImages(dataInfoRoom?.imageDTOs);
   }, [dataInfoRoom]);
-  console.log(dataInfoRoom);
 
   return (
-    <div className="box px-5 py-6">
+    <div className=" bg-white rounded-md shadow px-7 pt-6 pb-16">
       {/* title */}
-      <div className=" py-3">
+      <div className=" pb-3 text-neutral-600">
         <span className=" text-xl font-semibold">{dataInfoRoom?.roomType}</span>
       </div>
       {/* info  */}
       <div className=" flex">
         {/* image and size Room */}
         <div className=" flex flex-col gap-5 flex-1 pr-4">
-          <div className=" w-72 rounded-2xl overflow-hidden">
-            <img src={imageRoom} alt="" />
+          <div className=" block h-60 w-full rounded-md overflow-hidden">
+            <img className="h-full w-full" src={imageRoom} alt="" />
           </div>
           <div className="flex flex-col gap-6">
-            <span className=" text-gray-600">{30} m2</span>
-            <div className="flex flex-col gap-3">
-              <Utilities utilitie={"vòi tắm đứng"} />
-              <Utilities utilitie={"tủ lạnh khu vực chờ"} />
-              <Utilities utilitie={"máy lạnh"} />
-            </div>
             <div className="flex justify-center">
               <button
-                className=" rounded-2xl px-6 py-1 bg-cyan-400 text-white active:bg-cyan-600 hover:bg-cyan-500 "
+                className=" rounded-md px-6 py-2 font-semibold text-sm bg-cyan-400 text-white active:bg-cyan-600 hover:bg-cyan-500 "
                 type="buttom"
                 onClick={handleDetailRoom}
               >
@@ -145,29 +134,27 @@ function InfoRoom({ dataInfoRoom, max }) {
           </div>
         </div>
         {/* Utilitis Room */}
-        <div className=" flex flex-col justify-between gap-6 flex-1 border-2 rounded-xl px-4 py-6">
-          <div className=" flex flex-col gap-4 pb-3 border-b ">
-            <span className=" text-lg font-semibold">
-              {dataInfoRoom.roomType}
-            </span>
-            <div className=" flex justify-between px-4 text-gray-600">
-              <span className="">{1} người</span>
-              <span className="">{2} người</span>
-            </div>
-          </div>
-          {/*  */}
+        <div className=" flex flex-col justify-between gap-6 flex-1 rounded-md bg-neutral-50 shadow-sm px-4 py-6">
+          
+
+          {/* dich vu */}
           <div className="flex-1 border-b pb-4">
-            <div className=" grid grid-cols-2  gap-y-4">
-              <Utilities utilitie={"không gồm bữa sáng "} />
-              <Utilities utilitie={"Không đổi lịch "} />
-              <Utilities utilitie={"Wifi miễn phí "} />
-              <Utilities utilitie={"hủy phòng có thu phí"} />
-              <Utilities utilitie={"Không hút thuốc "} />
-              <Utilities utilitie={"Không hoàn tiền "} />
+            <h3 className=" text-gray-600 font-semibold text-sm mb-4">Dịch vụ phòng: </h3>
+            {dataInfoRoom?.serviceDTOs?.length > 0 ?
+              <div className=" grid grid-cols-2  gap-y-4">
+              {dataInfoRoom?.serviceDTOs?.map((servic,index) => 
+                <Utilities key={index} utilitie={servic} />
+              )}
             </div>
+            :
+              <div className=" block py-3 text-center bg-white">
+                <span className="text-sm font-semibold text-gray-500">Hiện khách sạn chưa có dịch vụ</span>
+              </div>
+            }
           </div>
+
           <div className=" flex justify-between items-center">
-            <div className=" px-5 py-3 box flex gap-5 ">
+            <div className=" px-5 py-3 rounded-lg bg-white shadow-md border flex gap-5 ">
               <button
                 className="text-green-400 active:text-green-600"
                 onClick={handleMinusCount}
@@ -182,8 +169,8 @@ function InfoRoom({ dataInfoRoom, max }) {
                 <FontAwesomeIcon icon="fa-solid fa-plus" />
               </button>
             </div>
-            <span className=" text-xl font-semibold">
-              {dataInfoRoom.pricePerNight} VND
+            <span className=" text-lg text-gray-600 font-semibold">
+              {format.FormatNumber(dataInfoRoom?.pricePerNight)} VNđ
             </span>
           </div>
         </div>

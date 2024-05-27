@@ -23,26 +23,29 @@ import AddImageHotel from "../pages/manage/myHotels/addImageHotel";
 import Contact from "../pages/contact/contact";
 import DetailHotel from "../pages/manage/myHotels/detailHotel";
 import AddImageRoom from "../pages/manage/myHotels/addImageRoom";
+import NotFound from "../pages/notFound";
+import DefaultLayoutManager from "../layout/defaultLayout/defaultLayoutManager";
+import DetailsBookings from "../pages/manage/manageBookings/detailsBooking";
+import DetailBookings from "../pages/admins/listBookings/detailBooking";
 
 const publicRoute = [
   { path: "/", componet: Home },
   { path: "/hotel", componet: Hotel },
   { path: "/thingsToDo", componet: ThingsToDo },
-  { path: "/admin", componet: Admin, layout: DefaultLayoutAdmin },
-  { path: "/admin/listUser", componet: ListUser, layout: DefaultLayoutAdmin },
-  { path: "/admin/listHotel", componet: ListHotel, layout: DefaultLayoutAdmin },
+  { path: "/admin/listUser", componet: ListUser, layout: DefaultLayoutManager},
+  { path: "/admin/listHotel", componet: ListHotel, layout: DefaultLayoutManager },
   {
     path: "/admin/listBooking",
     componet: ListBooking,
-    layout: DefaultLayoutAdmin,
+    layout: DefaultLayoutManager,
   },
+  {path: "/admin/listBooking/detail", componet: DetailBookings, layout: DefaultLayoutManager },
   { path: "/hotel/room/:id", componet: Room },
   {
     path: "/manager/listRooms",
     componet: ListRoom,
     layout: DefaultLayoutAdmin,
   },
-  { path: "/manager", componet: HomeManage, layout: DefaultLayoutAdmin },
   { path: "/manager/myHotels", componet: MyHotel, layout: DefaultLayoutAdmin },
   {
     path: "/manager/manageBookings",
@@ -82,7 +85,9 @@ const publicRoute = [
     componet: DetailHotel,
     layout: DefaultLayoutAdmin,
   },
+  {path: "/manager/manageBookings/detailbooking", componet: DetailsBookings, layout: DefaultLayoutAdmin},
   { path: "/contact", componet: Contact },
+  {path: "/*",componet: NotFound}
 ];
 
 export default publicRoute;

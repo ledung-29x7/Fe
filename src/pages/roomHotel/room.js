@@ -3,6 +3,7 @@ import { useStore } from "../../store/contexts";
 import { actions } from "../../store/action";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { format } from "../../componet/logic"
 import * as apis from "../../apis"
 import TitleRoom from "../../componet/roomComponets/titleRoom";
 import SlideRoom from "../../componet/roomComponets/slideRoom";
@@ -17,28 +18,25 @@ function Room() {
     const { id } = useParams()
     const [state, dispatch] = useStore();
     const [showInfoRoom, setShowInfoRoom] = useState(false);
-    const [showFormBooking, setShowFromBooking] = useState(false);
-    const [imagesHotel, setImagesHotel ] = useState([]);
+    const [imagesHotel, setImagesHotel] = useState([]);
     const [dataRoom, setDataRoom] = useState([])
     const [total, setTotal] = useState(0);
     const navigate = useNavigate();
     const {
         isInforoom,
-        isFormBooking,
         getSearch,
         priceRoomS,
         priceRoomD,
         priceRoomF,
         checkin,
         checkout,
-        countNType
+        countNType,
+        countNTypeDou,
+        countNTypeFami,
     } = state;
-    const [roomBooking, setRoomBooking] = useState({
-        roomType: "",
-        count: 0
-    });
+
     const [bookingInfo, setBookingInfo] = useState({
-        hotelId : id,
+        hotelId: id,
         checkinDate: "",
         checkoutDate: "",
         durationDays: 0,
@@ -47,6 +45,23 @@ function Room() {
         ],
         amount: 0
     });
+
+    // Hàm để chuyển đường link ảnh đầu tiên xuống cuối cùng
+    const nextImages = () => {
+        const newImages = [...imagesHotel];
+        const firstImage = newImages.shift(); // Lấy phần tử đầu tiên
+        newImages.push(firstImage); // Đẩy phần tử đầu tiên xuống cuối mảng
+        setImagesHotel(newImages); // Cập nhật lại trạng thái
+    };
+
+    const privousImages = () => {
+        const newImages = [...imagesHotel];
+        const lastImage = newImages.pop(); // Lấy phần tử cuối cùng
+        newImages.unshift(lastImage); // Đẩy phần tử cuối cùng lên đầu mảng
+        setImagesHotel(newImages); // Cập nhật lại trạng thái
+    };
+
+    const displayedImages = imagesHotel.slice(0, 3);
 
     // get API
     useEffect(() => {
@@ -74,24 +89,36 @@ function Room() {
         setShowInfoRoom(isInforoom)
     }, [isInforoom])
 
-
+    // set booking info
     useEffect(() => {
+        let totalBooked = [];
         const datein = new Date(checkin);
         const dateout = new Date(checkout);
         const msin = datein.getTime();
         const msout = dateout.getTime();
         const duration = Math.ceil((msout - msin) / (24 * 60 * 60 * 1000))
 
-        setBookingInfo(b=>({
-            ...b,
+        if (countNType?.count > 0) {
+            totalBooked.push(countNType)
+        }
+        if (countNTypeDou?.count > 0) {
+            totalBooked.push(countNTypeDou)
+        }
+        if (countNTypeFami?.count > 0) {
+            totalBooked.push(countNTypeFami)
+        }
+        console.log(totalBooked)
+        setBookingInfo(prev => ({
+            ...prev,
             checkinDate: checkin,
             checkoutDate: checkout,
             durationDays: duration,
-            roomSelections: [countNType],
+            roomSelections: totalBooked,
             amount: total
         }))
 
     }, [countNType, checkin, checkout, total])
+
 
     // Get Image Hotel
     useEffect(() => {
@@ -106,20 +133,20 @@ function Room() {
         displayImages(dataRoom?.imageDTOs);
         setImagesHotel(images);
     }, [dataRoom])
-    
+
+
     // Open Form Booking
     const handleOpenBooking = () => {
-
         const FetchData = async () => {
             try {
                 await apis.Booking(bookingInfo)
                     .then(res => {
-                        
                         if (res.status === 200) {
-                            dispatch(actions.getInfoBooking({...bookingInfo,
-                                                                nameHotel:dataRoom?.name,
-                                                                address : dataRoom?.addressDTO,
-                                                            }))
+                            dispatch(actions.getInfoBooking({
+                                ...bookingInfo,
+                                nameHotel: dataRoom?.name,
+                                address: dataRoom?.addressDTO,
+                            }))
                             navigate("/pay")
                         }
                     })
@@ -130,9 +157,7 @@ function Room() {
         FetchData();
     }
 
-    useEffect(() => {
-        setShowFromBooking(isFormBooking)
-    }, [isFormBooking])
+    // Slide 
 
 
     // when click
@@ -140,9 +165,7 @@ function Room() {
         var overlay = document.getElementById("overlay")
         if (event.target === overlay) {
             setShowInfoRoom(false)
-            setShowFromBooking(false)
             dispatch(actions.ModalInforRoom(false))
-            dispatch(actions.ModalFormBooking(false))
         }
     };
 
@@ -154,52 +177,55 @@ function Room() {
     return (
         <div className="">
             <div className="flex flex-col containerr px-8 py-20 ">
-                <TitleRoom address={dataRoom.addressDTO} sao={5} title={dataRoom.name} introduce={dataRoom.roomDTOs} />
+                <TitleRoom address={dataRoom?.addressDTO} sao={5} title={dataRoom?.name} introduce={dataRoom?.roomDTOs} />
             </div>
             <div className=" px-6">
                 {/* sildes */}
-                <div className="flex justify-center gap-8 m-auto relative w-full rounded-3xl h-auto overflow-hidden">
+                <div onClick={privousImages} className="flex justify-center gap-8 m-auto relative w-full rounded-3xl h-auto overflow-hidden ">
                     {/* prev */}
-                    <button type="button" className=" z-10 hover:bg-[#0e4f4f] hover:text-white 
+                    <button id="previous" type="button" className=" z-10 hover:bg-[#0e4f4f] hover:text-white 
                             border text-[#0e4f4f] bg-white flex p-3 rounded-full 
                             absolute w-[41px] left-5 top-1/2 translate-y-1/2 "
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-left" />
                     </button>
+
                     {/* next */}
-                    <button type="button" className=" z-10 hover:bg-[#0e4f4f] hover:text-white border 
+                    <button onClick={nextImages} type="button" className=" z-10 hover:bg-[#0e4f4f] hover:text-white border 
                             text-[#0e4f4f] bg-white flex p-3 rounded-full 
                             absolute w-[41px] right-5 top-1/2 translate-y-1/2 "
                     >
                         <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
                     </button>
+
                     {/* images */}
-                    {imagesHotel.map((img)=> 
-                        <SlideRoom imgSlide={img} />
+                    {displayedImages.map((img, index) =>
+                        <SlideRoom key={index} imgSlide={img} />
                     )}
                 </div>
             </div>
             {/* end slide */}
             <div className="flex flex-col gap-10 px-8 py-20 containerr">
                 {/* navi  */}
-                <div className=" bg-slate-200 rounded-lg text-sm flex items-center gap-2 p-1">
-                    <NavButton nav={"Đặc điểm"} />
-                </div>
 
                 <div className="flex gap-8  w-full">
-                    <div className="flex flex-col gap-20 flex-grow">
+                    <div className="flex flex-col gap-12 flex-grow">
                         {/* dac diem noi bat */}
-                        <div className="flex flex-col gap-10">
-                            <TitleHome title={"Tính năng nổi bật"} />
-                            <div className="flex flex-col gap-6">
-                              
+                        <div className="flex flex-col gap-5">
+                            <TitleHome title={"Tiểu sử"} />
+                            {dataRoom?.description !== null ?
+                                <div className="flex flex-col gap-6">
                                     <Utilitie src={"../../icon/icon-utiliti.svg"} util={dataRoom?.description} />
-                                
-                            </div>
+                                </div>
+                                :
+                                <div className="block py-5 text-center roun bg-neutral-100">
+                                    <span className=" text-gray-500 text-sm font-semibold">Hiện tiểu sử chưa được cập nhật</span>
+                                </div>
+                            }
                         </div>
 
                         {/* cac loai phong gia */}
-                        <div className=" flex flex-col gap-10">
+                        <div className=" flex flex-col gap-5">
                             <TitleHome title={"Các loại phòng $ giá"} />
                             {/* <div className="flex flex-col gap-6 border rounded-lg px-5 py-6">
                                 <span className=" text-lg font-semibold ">
@@ -212,8 +238,7 @@ function Room() {
                                     <CheckBox amenities={"abc"} />
                                 </div>
                             </div> */}
-                            <div className=" px-20 py-8 rounded-3xl bg-[url('https://mixivivu.com/section-background.png')] flex flex-col gap-10 bg-[#f2f4f7]">
-
+                            <div className=" sm:px-56 py-8 rounded-3xl bg-[url('https://mixivivu.com/section-background.png')] flex flex-col gap-10 bg-[#f2f4f7]">
                                 <div className="flex justify-end px-2">
                                     <button className=" text-[#0e4f4f] font-semibold px-6 py-4 rounded-2xl bg-white">
                                         Xóa lựa chọn
@@ -228,22 +253,22 @@ function Room() {
                                 )}
                                 <div className=" flex justify-between">
                                     <div className="flex flex-col px-2">
-                                        <span className=" text-gray-700">
+                                        <span className=" font-semibold text-gray-700">
                                             Tổng tiền
                                         </span>
                                         <span className=" pl-2 text-2xl font-bold text-[#0e4f4f]">
-                                            {total} $
+                                            {format.FormatNumber(total)} VNđ
                                         </span>
                                     </div>
-                                    <button className=" bottom bg-[#77dada]" onClick={handleOpenBooking}>
-                                        <div>Đặt ngay</div>
+                                    <button className=" rounded-md text-white px-6 py-2 bg-[#77dada]" onClick={handleOpenBooking}>
+                                        <div className="text-sm font-semibold">Đặt ngay</div>
                                         <FontAwesomeIcon icon="fa-solid fa-arrow-right" />
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
 

@@ -25,6 +25,7 @@ function ListHotel() {
     useEffect(() => {
         CallData();
     },[])
+    console.log(hotels)
 
     // assign value to users
     useEffect(()=>{
@@ -70,34 +71,32 @@ function ListHotel() {
     })
 
     return (
-        <div className=" my-10 px-10">
-            <div className=" containerr flex flex-col gap-6">
-                <div className=" flex justify-between items-center">
+        <div className=" px-10 bg-gray-50 py-10 rounded-md">
+            <div className=" containerr">
+                <div className="  flex justify-between items-end pb-6">
                     <div className="flex flex-col gap-5">
-                        <h4 className="font-bold text-4xl w-80">
-                            Hotel List
+                        <h4 className="font-bold text-lg text-gray-600">
+                            Danh sách khách sạn
                         </h4>
-                        <img className="w-24" src="../icon/heading-border.png" alt="" />
+                       
                     </div>
                 </div>
 
                 {isSucc ?
                     <div className="">
-                        <div className=" bg-green-600">
-                            <h4 className=" text-white"> You have successfully edited </h4>
+                        <div className=" py-3 bg-green-600">
+                            <h4 className=" text-white"> successfully</h4>
                         </div>
                     </div>
                 :null}
 
-                <div className=" mt-5 shadow_uslist relative">
-                    <table className=" w-full shadow ">
-                        <tr className="sticky top-0 bg-slate-200 h-12">
-                            <th>ID</th>
-                            <th>Name Hotel</th>
-                            <th>UserName Hotel</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
+                <div className="  mt-4 rounded-md bg-white">
+                    <table className=" w-full ">
+                        <thead className=" text-left text-sm text-gray-700 h-12">
+                            <th>Tên khách sạn</th>
+                            <th>người quản lý</th>
+                            <th>Thao tác</th>
+                        </thead>
                         {hotels?.map((dt,index)=>
                             <RowHotel
                                 key={index}

@@ -4,19 +4,21 @@ import { useStore } from "../../../store/contexts";
 import { actions } from "../../../store/action";
 import * as apis from "../../../apis"
 
-function DetailsBookings() {
+function DetailBookings() {
 
     const navigate = useNavigate()
-    const [infoBooked,setInfoBooked] = useState();
+    const [infoBooked,setInfoBooked] = useState({});
     const [state,] = useStore();
     const {idEdit} = state;
 
+    console.log(idEdit)
     useEffect(() => {
         const FetchData = async () => {
             try {
                 if(idEdit !== null){
-                    const response = await apis.getManager(`booking/${idEdit}`)
+                    const response = await apis.getUser(`bookings/${idEdit}`)
                     setInfoBooked(response.data)
+                    console.log(response.data)
                 }
             } catch (error) {
                 console.log(error)
@@ -25,6 +27,7 @@ function DetailsBookings() {
         FetchData();
     }, [idEdit])
 
+    console.log(infoBooked)
     return (
         <div className="">
             <div className="flex flex-col gap-8 containerr px-8 py-8 ">
@@ -102,11 +105,11 @@ function DetailsBookings() {
                 </div>
 
                 <div className="flex gap-5 justify-end">
-                    <button onClick={() => navigate("/manager/manageBookings")} className="bottom border font-bold border-cyan-500">Thoát</button>
+                    <button onClick={() => navigate("/admin/listBooking")} className="bottom border font-bold border-cyan-500">Thoát</button>
                     
                 </div>
             </div>
         </div>
     );
 }
-export default DetailsBookings;
+export default DetailBookings;

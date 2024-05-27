@@ -1,11 +1,11 @@
 import axios from "../axios";
 
 // lấy dữ liệu User, hotel
-export const getUser = (ad) =>
+export const getUser = (host) =>
   new Promise(async (resolve, reject) => {
     try {
       const response = await axios({
-        url: `admin/${ad}`,
+        url: `admin/${host}`,
         method: "GET",
         headers: {
           Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
@@ -244,6 +244,7 @@ export const AddManagerHotel = (add) =>
         url: `manager/hotels`,
         method: "post",
         data: add,
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
         },
@@ -280,6 +281,7 @@ export const HistoryBookings = (host) =>
       const response = await axios({
         url: `${host}`,
         method: "get",
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
         },

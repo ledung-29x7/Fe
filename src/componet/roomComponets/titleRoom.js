@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { format } from "../logic";
 
 function TitleRoom({title,introduce,sao,address}) {
 
@@ -26,8 +27,8 @@ function TitleRoom({title,introduce,sao,address}) {
             </div>
             <div className="w-72">
                 <p className=" text-2xl font-semibold text-lime-800 bottom-0">
-                    {price} $/
-                </p>Khách
+                    {format.FormatNumber(introduce?.find(ob => ob.roomType === "SINGLE")?.pricePerNight)} VNđ/Phòng
+                </p>
             </div>
         </div>
     );

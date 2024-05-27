@@ -35,37 +35,33 @@ function ListUser() {
 
 
     return (
-        <div className=" my-14 px-10">
+        <div className=" px-10 bg-gray-50 py-10 rounded-md">
             <div className=" containerr">
-                <div className=" flex justify-between items-center pb-6">
+                <div className=" flex justify-between items-end pb-6">
                     <div className="flex flex-col gap-5">
-                        <h4 className="font-bold text-4xl">
+                        <h4 className="font-bold text-lg text-gray-600">
                             Danh sách khách sạn
                         </h4>
                     </div>
-                    <button className="mx-10 px-4 py-3 bg-lime-600 flex justify-center items-center gap-3 rounded-md"
+                    <button className=" px-4 py-2 bg-lime-600 flex items-center gap-3 rounded-md"
                         onClick={() => navigate('/manager/myHotel/add')}
                     >
-                        <span className=" w-6 h-6 border-2 border-white rounded-full flex justify-center items-center">
-
-                            <FontAwesomeIcon style={{ color: "white" }} icon="fa-solid fa-plus" />
+                        <span className=" w-6 h-6 border-2 border-white rounded-full text-white flex justify-center items-center">
+                            <FontAwesomeIcon icon="fa-solid fa-circle-plus" />
                         </span>
-                        <span className=" text-white ">Thêm khách sạn</span>
+                        <span className=" text-white text-sm font-semibold ">Thêm khách sạn</span>
                     </button>
                 </div>
                 <div>
 
                 </div>
-                <div className=" mt-4">
-                    <table className="  w-full shadow ">
-                        <tr className="bg-slate-200 h-12">
-                            <th>ID</th>
+                <div className=" mt-4 rounded-md bg-white">
+                    <table className=" w-full ">
+                        <thead className=" text-left text-sm text-gray-700  h-12">
                             <th>Tên Khách Sạn</th>
                             <th>Địa Chỉ</th>
-                            <th>Sô Lượng Phòng</th>
-                            <th>Edit</th>
-                            <th>Delete</th>
-                        </tr>
+                            <th>Thao tác</th>
+                        </thead>
                         {rooms.map((us) => (
                             <RowList
                                 key={us.id}

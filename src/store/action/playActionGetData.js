@@ -7,7 +7,8 @@ import {
     CHECKINDATE,
     CHECKOUTDATE,
     COUNTROOM,
-    ROOMTYPE
+    COUNTROOMDOUBLE,
+    COUNTROOMFAMI,
     } from "./constants";
 
 // Get apis User
@@ -83,7 +84,7 @@ export const CheckoutDate = (date) => {
     }
 }
 
-// count Room 
+// count Room  Single
 export const CountNType = (countNtype) => {
     return {
         type: COUNTROOM,
@@ -91,10 +92,18 @@ export const CountNType = (countNtype) => {
     }
 }
 
-// Room type
-// export const RoomType = (typeRom) => {
-//     return {
-//         type: ROOMTYPE,
-//         typeRom
-//     }
-// }
+// count and type Double
+export const CountNTypeDou = (countDou) => {
+    return {
+        type: COUNTROOMDOUBLE,
+        countDou
+    }
+}
+
+// count and type Family
+export const CountNTypeFami = (countFami) => {
+    return {
+        type: COUNTROOMFAMI,
+        countFami
+    }
+}

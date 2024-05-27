@@ -9,7 +9,7 @@ import MenuItem from "./menuItem";
 import SignUp from "../user/signUp";
 import Login from "../user/logIn";
 
-function HeaderAdmin() {
+function HeaderManager() {
     const [isShowingSignUp, setIsShowingSignUp] = useState(false);
     const [isShowingLogin, setIsShowingLogin] = useState(false);
     const [isChecking, setIsChecking] = useState(false);
@@ -21,17 +21,17 @@ function HeaderAdmin() {
         checkLoggedIn();
     }, [checkLogin])
 
-    const scrooltotop = () => {
-        return window.scrollTo({
-          top: 0,
-          behavior: `smooth`,
-        });
-      };
-
     // hủy Cookie
     function deleteCookie(name) {
         document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     }
+
+    const scrooltotop = () => {
+        return window.scrollTo({
+            top: 0,
+            behavior: `smooth`,
+        });
+    };
 
     // Hàm để lấy giá trị của một cookie
     function getCookie(name) {
@@ -133,8 +133,7 @@ function HeaderAdmin() {
             <div className=" flex items-center gap-24 h-full">
                 {/* logo home */}
                 <div className="h-full">
-                    <Link className=" h-full flex items-center" to={"/manager/myHotels"} >
-
+                    <Link className=" h-full flex items-center" to={"/admin/listUser"} >
                         <div>
                             <img
                                 onClick={scrooltotop}
@@ -232,4 +231,4 @@ function HeaderAdmin() {
 
     );
 }
-export default HeaderAdmin;
+export default HeaderManager;

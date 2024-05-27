@@ -1,5 +1,6 @@
 import { useStore } from "../../../store/contexts";
 import { actions } from "../../../store/action";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function RowHotel({hotels}){
 
@@ -16,15 +17,16 @@ function RowHotel({hotels}){
     }
 
     return(
-        <tbody className=" text-gray-600 h-11">
-            <td className=" text-center">{hotels?.id}</td>
+        <tbody className="odd:bg-white text-gray-600 text-sm odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
             <td>{hotels?.name}</td>
             <td>{hotels?.managerUsername}</td>
-            <td className=" text-center">
-                <button onClick={HandleEdit} className="buttom_crud w-14 h-8 bg-amber-400 ">Edit</button>
-            </td>
-            <td className=" text-center">
-                <button onClick={handleDelete} className=" buttom_crud w-14 h-8 bg-red-500">Delete</button>
+            <td className=" text-left">   
+                <button onClick={HandleEdit} className="mr-4 text-lg text-amber-400 ">
+                    <FontAwesomeIcon icon="fa-solid fa-pen" />
+                </button>
+                <button onClick={handleDelete} className=" ml-4 text-lg py-3 text-red-500">
+                    <FontAwesomeIcon icon="fa-solid fa-trash-can" />
+                </button>
             </td>
         </tbody>
     );

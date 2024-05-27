@@ -117,7 +117,7 @@ function Search({setSearch}) {
             />
            
             <div className="flex items-center ">
-                <button className=" bg-cyan-200 px-5 py-4 transition duration-300 rounded-md font-bold hover:bg-cyan-800 hover:text-white">Tìm kiếm</button>
+                <button className=" bg-cyan-400 px-5 py-4 transition duration-300 rounded-md font-bold hover:bg-cyan-800 hover:text-white">Tìm kiếm</button>
             </div>
         </form>
     );

@@ -11,21 +11,21 @@ function AddImageRoom() {
     const [susserfull, setSusserfull] = useState(false);
     const [readerImg, setReaderImg] = useState([]);
     const [state, dispatch] = useStore();
-    const {getIdRoom} = state;
+    const { getIdRoom } = state;
     const [selectedImg, setSelectedImg] = useState(null);
 
     const handleFile = (e) => {
         setSelectedImg(e.target.files);
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         var imgUpload = []
         for (let i = 0; i < selectedImg?.length; i++) {
-            imgUpload.push(URL.createObjectURL(selectedImg[0]));
+            imgUpload.push(URL.createObjectURL(selectedImg[i]));
         }
         setReaderImg(imgUpload)
 
-    },[selectedImg])
+    }, [selectedImg])
 
     const handleAddImg = (e) => {
         const FetchEdit = async () => {
@@ -59,7 +59,7 @@ function AddImageRoom() {
         <div>
             {/* Add image Room Single */}
             <div className="flex justify-center max-w-7xl m-auto bg-gray-50 w-full ">
-                <div className=" py-32 flex items-center w-full px-3 ">
+                <div className=" flex items-center w-full rounded-md px-8 py-8 ">
 
                     {susserfull ?
                         <div className=" rounded-b-md fixed top-[96px] bg-green-600 text-white py-3 px-9 flex justify-center ">
@@ -68,11 +68,11 @@ function AddImageRoom() {
                         : null
                     }
 
-                    <div className=" flex flex-col gap-8 border-2 rounded-lg p-3 w-full">
+                    <div className=" flex flex-col gap-5 border-2 bg-white rounded-lg p-3 w-full">
                         <div className="">
                             <h3 className=" font-semibold text-sm text-gray-500">Thêm ảnh của bạn </h3>
                         </div>
-                        <div className=" bg-gray-100 py-8 px-4 rounded-lg flex-col flex gap-32 mb-5">
+                        <div className=" bg-gray-100 py-8 px-4 rounded-lg flex-col flex gap-10 mb-5">
 
                             {/* Add image Hotel */}
                             <form className="flex justify-center flex-col" onSubmit={handleAddImg}>
@@ -100,20 +100,18 @@ function AddImageRoom() {
                                 <div className="flex justify-center mt-6">
                                     <button className=" px-6 py-2 bg-green-400 rounded-md text-white" type="submit">Thêm</button>
                                 </div>
+
+                                <div className=" grid grid-cols-6 gap-1">
+                                    {readerImg.map((img) =>
+                                        <img className=" m-3 w-40 h-40" src={img} alt="" />
+                                    )}
+                                </div>
                                 
-                                <div className="">
-                            {readerImg.map((img)=>
-                                <img className=" m-3 w-40 h-40" src={img} alt=""/>
-                            )}
-                        </div>
-                        <div className="flex justify-end pr-5">
-                        
-                        </div>
-                               
+
                             </form>
 
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

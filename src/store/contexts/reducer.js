@@ -20,7 +20,9 @@ import {
     CHECKLOGIN,
     GETIDBOOKING,
     ISSHOWINGDELETE,
-    GETINFOBOOKING
+    GETINFOBOOKING,
+    COUNTROOMDOUBLE,
+    COUNTROOMFAMI
 } from "../action/constants";
 
 export const initState = {
@@ -43,6 +45,8 @@ export const initState = {
     checkin : "",
     checkout : "",
     countNType: {},
+    countNTypeDou: {},
+    countNTypeFami: {},
     checkLogin: false,
     getIdBooking: 0,
     getinfoBK: {}
@@ -144,6 +148,16 @@ function Reducers(state,action){
             return {
                 ...state,
                 countNType: action.countNtype
+            }
+        case COUNTROOMDOUBLE: // GET count and type room Double
+            return {
+                ...state,
+                countNTypeDou: action.countDou
+            }
+        case COUNTROOMFAMI :
+            return {
+                ...state,
+                countNTypeFami: action.countFami
             }
         case CHECKLOGIN: // check xem đã login chưa
             return {

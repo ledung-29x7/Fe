@@ -20,7 +20,7 @@ function TableBooked({bookings}) {
                             <th>Tên khách sạn</th>
                             <th>Ngày check in</th>
                             <th>Ngày check out</th>
-                            <th>Tổng tiền</th>
+                            <th>Tổng tiền (vnd)</th>
                             <th>Chi tiết</th>
                         </thead>
                         {bookings?.map((dt)=>

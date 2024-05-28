@@ -15,7 +15,7 @@ function MyBookings() {
         const response = await apis.HistoryBookings("customer/bookings");
         setInfoBooked(response);
       } catch (error) {
-        if (error.response.status === 403) {
+        if (error?.response?.status === 403) {
           setErrors("Vui lòng đăng nhập tài khoản custumer để xem danh sách")
         }
         setShowError(true)

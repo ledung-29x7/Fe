@@ -2,6 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import { useStore } from "../../../store/contexts";
 import { actions } from "../../../store/action";
+import {format} from "../../../componet/logic"
 
 function RowBooking({ booking }) {
 
@@ -18,7 +19,7 @@ function RowBooking({ booking }) {
             <td>{booking?.customerName}</td>
             <td>{booking?.hotelName}</td>
             <td>{booking?.checkinDate}</td>
-            <td>{booking?.totalPrice}</td>
+            <td>{format.FormatNumber(booking?.totalPrice)}</td>
             <td className=" text-left">
                 <button onClick={handleOpenDetail} className="buttom_crud w-14 h-8 text-sky-600 text-2xl ">
                     <FontAwesomeIcon icon="fa-solid fa-circle-info" />

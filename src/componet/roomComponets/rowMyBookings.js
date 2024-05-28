@@ -3,6 +3,7 @@ import { useStore } from "../../store/contexts";
 import { actions } from "../../store/action";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { format } from "../logic";
 
 function RowMyBookings({booking}) {
     
@@ -25,7 +26,7 @@ function RowMyBookings({booking}) {
             <td>{infoBookings?.hotelName}</td>
             <td>{infoBookings?.checkinDate}</td>
             <td>{infoBookings?.checkoutDate}</td>
-            <td>{infoBookings?.totalPrice}</td>
+            <td>{format.FormatNumber(infoBookings?.totalPrice)}</td>
             <td className=" text-center">
                 <button onClick={handleOpenDetail}  className="buttom_crud w-14 h-8 text-sky-600 text-xl ">
                     <FontAwesomeIcon icon="fa-solid fa-circle-info" />

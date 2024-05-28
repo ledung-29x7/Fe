@@ -25,10 +25,11 @@ function TitleRoom({title,introduce,sao,address}) {
                 </div>
                 <img className="w-24" src="../icon/heading-border.png" alt="" />
             </div>
-            <div className="w-72">
+            <div className="w-72 flex gap-2">
                 <p className=" text-2xl font-semibold text-lime-800 bottom-0">
-                    {format.FormatNumber(introduce?.find(ob => ob.roomType === "SINGLE")?.pricePerNight)} VNđ/Phòng
+                    {format.FormatNumber(introduce?.find(ob => ob.roomType === "SINGLE")?.pricePerNight)}
                 </p>
+                <span className="  text-lg font-semibold text-lime-800 bottom-0">VNđ/Phòng/Đêm</span>
             </div>
         </div>
     );

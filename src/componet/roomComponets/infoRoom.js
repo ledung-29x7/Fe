@@ -143,7 +143,7 @@ function InfoRoom({ dataInfoRoom, max }) {
             {dataInfoRoom?.serviceDTOs?.length > 0 ?
               <div className=" grid grid-cols-2  gap-y-4">
               {dataInfoRoom?.serviceDTOs?.map((servic,index) => 
-                <Utilities key={index} utilitie={servic} />
+                <Utilities key={index} utilitie={servic?.name} />
               )}
             </div>
             :

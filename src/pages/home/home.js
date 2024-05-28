@@ -9,6 +9,8 @@ import LocaltionPicnic30 from "../../componet/homeComponets/localtionPicnic30-30
 import LocaltionPicnic50 from "../../componet/homeComponets/localtionPicnic50-50";
 
 function Home() {
+
+
   const location = useLocation();
   const navigate = useNavigate();
   const [, dispatch] = useStore();
@@ -26,7 +28,7 @@ function Home() {
     "-" +
     (date.getMonth() + 1) +
     "-" +
-    (date.getDate() + 4);
+    (date.getDate() + 1);
 
   const [searchValue, setSearchValue] = useState({
     city: "",
@@ -128,23 +130,23 @@ function Home() {
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/DJI_0550-HDR-Pano.jpg/1200px-DJI_0550-HDR-Pano.jpg"
             />
             <LocaltionPicnic50
-              onClick={() => handleSearch("Ha NOi")}
-              src="https://static.vinwonders.com/production/dia-diem-chup-anh-dep-o-ha-noi-3.jpg"
+              onClick={() => (handleSearch("Ha Noi"),scrooltotop)}
+              src="https://image.baophapluat.vn/w840/Uploaded/2024/athlraqhpghat/2023_06_25/ho-hoan-kiem-7185.jpg"
             />
           </div>
           <div className="flex">
             <LocaltionPicnic30
-              onClick={() => handleSearch("Da Nang")}
-              src="https://cdn3.ivivu.com/2022/09/T%E1%BB%95ng-quan-du-l%E1%BB%8Bch-V%C5%A9ng-T%C3%A0u-ivivu.jpg"
+              onClick={() => (handleSearch("Da Nang"),scrooltotop)}
+              src="https://r-xx.bstatic.com/xdata/images/xphoto/max1200/282191292.jpg?k=38172bfb2816610a68304b6f515a16bd0a53d7aa9308ce0e753c37285fc5ee8f&o="
             />
 
             <LocaltionPicnic30
-              onClick={() => handleSearch("Da Lat")}
-              src="https://vcdn1-dulich.vnecdn.net/2022/04/01/MaPiLengHaGiangVnExpress-16488-3513-7729-1648806038.jpg?w=0&h=0&q=100&dpr=2&fit=crop&s=lFRvWQkOmXNG_PtKd7ylvw"
+              onClick={() => (handleSearch("Da Lat"),scrooltotop)}
+              src="https://sakos.vn/wp-content/uploads/2023/04/hanh-trinh-kham-pha-da-lat-bang-trai-ngoai-troi-1.png"
             />
             <LocaltionPicnic30
-              onClick={() => handleSearch("Phu Quoc")}
-              src="https://vcdn1-dulich.vnecdn.net/2022/04/08/du-lich-Phu-Quoc-02-5022-1649405369.jpg?w=0&h=0&q=100&dpr=1&fit=crop&s=wlhAT2o6cm94fcbOlM28Lg"
+              onClick={() => (handleSearch("Phu Quoc"),scrooltotop)}
+              src="https://hanoitourist.vn/sites/default/files/2024/03/kinh-nghiem-du-lich-phu-quoc-cho-gia-dinh-1.jpg"
             />
           </div>
         </div>

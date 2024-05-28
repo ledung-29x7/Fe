@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { useStore } from "../../store/contexts";
 import { actions } from "../../store/action";
 import * as apis from "../../apis"
+import { format } from "../../componet/logic";
 
 function BookingComfirmation() {
 
@@ -50,7 +51,7 @@ function BookingComfirmation() {
             <div className="flex flex-col gap-8 containerr px-8 py-8 ">
 
                 <div className="flex flex-col gap-5">
-                    <div className=" bg-blue-400 py-6 px-5 rounded-t-2xl">
+                    <div className=" bg-blue-400 py-6 px-5 rounded-t-xl">
                         <h3 className="font-bold text-xl">Xác nhận đặt phòng</h3>
                     </div>
 
@@ -71,6 +72,7 @@ function BookingComfirmation() {
                             <h4 className="font-semibold">Mã xác nhận:  </h4>
                             <div className="">{infoBooked?.confirmationNumber}</div>
                         </div>
+
                         {/* info Booking */}
                         <div className="flex flex-col gap-6 border-b-2">
                             {/* name Hotel */}
@@ -100,16 +102,16 @@ function BookingComfirmation() {
                             {/* Date Booking */}
                             <div className="flex justify-around">
                                 <div className=" text-center">
-                                    <h4 className="font-semibold">Check In</h4>
+                                    <h4 className="font-semibold text-sm">Check In</h4>
                                     <p className=" text-gray-600">{infoBooked?.checkinDate}</p>
                                 </div>
                                 <div className=" text-center">
-                                    <h4 className="font-semibold">Check Out</h4>
-                                    <p className="text-gray-600">{infoBooked?.checkoutDate}</p>
+                                    <h4 className="font-semibold text-sm">Check Out</h4>
+                                    <p className="text-gray-600 text-sm">{infoBooked?.checkoutDate}</p>
                                 </div>
                                 <div className=" text-center">
-                                    <h4 className="font-semibold">Số ngày lưu trú</h4>
-                                    <p className="">{infoBooked?.durationDays} Đêm</p>
+                                    <h4 className="font-semibold text-sm">Số ngày lưu trú</h4>
+                                    <p className="text-gray-600 text-sm">{infoBooked?.durationDays} Đêm</p>
                                 </div>
                             </div>
 
@@ -125,16 +127,19 @@ function BookingComfirmation() {
                         <div className="flex flex-col gap-6 pb-5">
                             <div className="flex gap-5 items-center">
                                 <h4 className=" text-xl font-bold">Tổng tiền:</h4>
-                                <p className=" font-semibold text-xl">{infoBooked?.totalPrice} VND</p>
+                                <div className="flex gap-2">
+                                    <span className=" font-semibold text-lg">{format.FormatNumber(infoBooked?.totalPrice)}</span>
+                                    <span className=" font-semibold text-sm"> VNđ</span>
+                                </div>
                             </div>
                             <div className="flex items-center gap-5">
-                                <h4 className="font-semibold">Phương thức thanh toán:</h4>
-                                <p className="text-sm">{infoBooked?.paymentMethod}</p>
+                                <h4 className="font-semibold text-gray-800">Phương thức thanh toán:</h4>
+                                <p className="text-sm ">{infoBooked?.paymentMethod}</p>
                             </div>
                             <div className="flex flex-col gap-4">
                                 <h4 className="font-semibold">Thông tin khách hàng:</h4>
                                 <div className="flex flex-col gap-2">
-                                    <p className="text-gray-600">Tên: {infoBooked?.customerName}</p>
+                                    <p className="text-gray-600 text-sm">Tên: {infoBooked?.customerName}</p>
                                     <p className="text-gray-600">Email: {infoBooked?.customerEmail}</p>
                                 </div>
                             </div>
@@ -143,9 +148,9 @@ function BookingComfirmation() {
                 </div>
 
                 <div className="flex gap-5 justify-end">
-                    <button onClick={() => navigate("/")} className=" text-cyan-600 rounded-md text-sm px-5 py-2 border font-bold border-cyan-500">Trang chủ</button>
+                    <button onClick={() => navigate("/")} className=" text-cyan-600 hover:bg-cyan-600 hover:text-white hover:border-white active:scale-95 rounded-md text-sm px-5 py-2 border font-bold border-cyan-500">Trang chủ</button>
                     <a href="/bookings"
-                        className=" text-white rounded-md text-sm px-5 py-2 font-bold bg-cyan-600">Chỗ đã đặt</a>
+                        className=" text-white hover:bg-cyan-500 active:scale-95 rounded-md text-sm px-5 py-2 font-bold bg-cyan-600">Chỗ đã đặt</a>
                 </div>
             </div>
             {showError ?

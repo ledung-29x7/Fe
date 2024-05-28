@@ -194,6 +194,9 @@ function Room() {
         window.addEventListener('click', handleClickOutsideModal)
     })
 
+
+    console.log(displayedImages)
+
     return (
         <div className="">
             <div className="flex flex-col containerr px-8 py-20 ">
@@ -274,10 +277,10 @@ function Room() {
                                 <div className=" flex justify-between">
                                     <div className="flex flex-col px-2">
                                         <span className=" font-semibold text-gray-700">
-                                            Tổng tiền
+                                            Giá cho {bookingInfo?.durationDays} Đêm
                                         </span>
                                         <span className=" pl-2 text-2xl font-bold text-[#0e4f4f]">
-                                            {format.FormatNumber(total)} VNđ
+                                            {format.FormatNumber(total* bookingInfo?.durationDays) } VNđ
                                         </span>
                                     </div>
                                     <button className=" ease-in-out duration-200 rounded-md text-white px-6 py-2 bg-[#77dada] active:scale-95 hover:bg-[#5aa4a4]" 

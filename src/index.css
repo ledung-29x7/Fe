@@ -211,7 +211,7 @@ code {
 .auth-form {
   max-width: 600px;
   min-height: 200px;
-  width: 432px;
+  width: 480px;
 }
 
 .auth-form_btn {
@@ -232,7 +232,7 @@ tbody {
     padding: 8px 12px;
   }
   td {
-    padding: 8px 14px;
+    padding: 8px 12px;
   }
 }
 

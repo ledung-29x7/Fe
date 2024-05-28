@@ -92,6 +92,7 @@ function HeaderUp() {
         await apis.LogOut().then((res) => {
           if (res.status === 200) {
             deleteCookie("token");
+            window.location.reload();
             scrooltotop()
             checkLoggedIn();
             navigate("/")
@@ -169,8 +170,9 @@ function HeaderUp() {
               onClick={handleHidden}
               className=" z-50 text-2xl rounded-full w-[2.8rem] h-11"
             >
+              <div id="userDropdown" onClick={handleHidden} className=" w-12 h-12 shield "></div>
               <div class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600">
-                <svg id="userDropdown" class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+                <svg onClick={handleHidden} id="userDropdown" class="absolute w-12 h-12 text-blue-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
               </div>
             </button>
 
@@ -193,7 +195,7 @@ function HeaderUp() {
       ) : (
         <div className=" flex gap-10 items-center">
           <button
-            className=" bg-cyan-400 flex items-center justify-center  bottom font-bold "
+            className=" bg-cyan-400 flex items-center justify-center hover:bg-cyan-500 active:scale-95  bottom font-bold "
             onClick={handleLogin}
           >
             Đăng ký / Đăng nhập

@@ -41,7 +41,7 @@ function Hotel() {
           <div className=" searchHotel flex flex-col gap-10 box">
             <div className="flex flex-col gap-4">
               <h4 className=" text-center font-bold text-4xl">
-                Rong chơi bốn phương,giá vẫn yêu thương
+                Rong chơi bốn phương, giá vẫn yêu thương
               </h4>
               <p className=" text-center text-lg text-gray-900 opacity-60">
                 Hơn 10000 khách sạn gì tốt đang chờ bạn
@@ -54,12 +54,12 @@ function Hotel() {
         <div>
           <div className="containerr px-8 ">
             <div className="">
-              <div className="flex flex-col ">
+              <div className=" px-20 ">
                 <TitleHome title="Khách sạn" />
               </div>
             </div>
 
-            <div className="flex gap-6 py-8">
+            <div className=" py-8 max-w-3xl m-auto">
               {/* <div className=" box w-1/4 ">
                                 <div className="border-b border-gray-300 filter-result">
                                     <h4>Lọc kết quả</h4>
@@ -72,7 +72,7 @@ function Hotel() {
                                     <CheckBox amenities="abc" />    
                                 </div>
                             </div> */}
-              <div className=" w-3/4 flex flex-col gap-8">
+              <div className=" flex flex-col gap-8">
                 {searchResult?.map((resul) => (
                   <ResultSearch key={resul.id} resul={resul} />
                 ))}

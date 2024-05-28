@@ -31,15 +31,18 @@ function Search({setSearch}) {
     // xử lý lấy định dạng ngày
     const dateFormatAux = (date) => {
         
-        let d = new Date(date),
-            month = '' + (d.getMonth()+1),
-            day = '' + d.getDate(),
-            year = d.getFullYear();
-
-        if (month.length<2) 
+        let d = new Date(date);
+        var month = '' + (d.getMonth()+1);
+        var day = '' + d.getDate();
+        var year = d.getFullYear();
+        
+        if (day.length < 2) {
+            day = "0" + day;
+        }
+        if (month.length<2) {
             month = "0" + month;
-        if(day.length<2)
-            date ="0" + day;
+        }
+        
         return [year, month, day].join('-')
     }
 
@@ -118,7 +121,7 @@ function Search({setSearch}) {
             />
            
             <div className="flex items-center ">
-                <button className=" bg-cyan-400 px-5 py-4 transition duration-300 rounded-md font-bold hover:bg-cyan-800 hover:text-white">Tìm kiếm</button>
+                <button className=" bg-cyan-400 px-5 py-4 active:scale-95 transition duration-300 rounded-md font-bold hover:bg-cyan-800 hover:text-white">Tìm kiếm</button>
             </div>
         </form>
     );

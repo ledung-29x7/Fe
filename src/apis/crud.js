@@ -151,6 +151,7 @@ export const getManager = (host) =>
       const response = await axios({
         url: `manager/${host}`,
         method: "GET",
+        withCredentials: true,
         headers: {
           Authorization: `Bearer ${window.sessionStorage.getItem("token")}`,
         },

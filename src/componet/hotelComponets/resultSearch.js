@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Utilities from "./utilities";
 import * as apis from "../../apis";
 import { useEffect, useState } from "react";
+import { format } from "../logic";
 
 const scrooltotop = () => {
   return window.scrollTo({
@@ -29,11 +30,11 @@ function ResultSearch({ resul }) {
     (ob) => ob.roomType === "SINGLE"
   )?.pricePerNight;
 
-  
+
   return (
     <div
-      className=" h-72 flex gap-5 box cursor-pointer items-center"
-      onClick={() => (navigate(`/hotel/room/${resul.id}`),scrooltotop())}
+      className=" h-72 flex gap-5 shadow border bg-neutral-50 rounded-md cursor-pointer items-center"
+      onClick={() => (navigate(`/hotel/room/${resul.id}`), scrooltotop())}
     >
       {/* image Hotel */}
       <div className=" p-4 static">
@@ -49,9 +50,9 @@ function ResultSearch({ resul }) {
       <div className="flex flex-col flex-grow pr-5 ">
         {/* info Hotel */}
         <div className=" flex flex-col gap-4">
-          <div className=" flex items-center flex-row gap-1 w-24 opacity-75 rounded-xl bg-slate-200">
-            <img className=" w-3 h-3 " src="./icon/local-80.png" alt="" />
-            <p className="text-sm">{resul.addressDTO.city}</p>
+          <div className=" flex items-center flex-row gap-1 pl-2 w-24 opacity-75 rounded-md bg-neutral-200">
+            <img className=" w-4 h-4 " src="./icon/local-80.png" alt="" />
+            <p className="text-sm text-orange-600">{resul.addressDTO.city}</p>
           </div>
           <p className=" font-bold text-xl opacity-70">{resul.name}</p>
           <div className="flex items-center item gap-1 opacity-75 rounded-xl">
@@ -68,7 +69,10 @@ function ResultSearch({ resul }) {
 
         {/* price */}
         <div className="flex items-center justify-between pt-5 border-t border-gray-300">
-          <p className=" text-lg font-semibold">{price}$/ Khách</p>
+          <div className="flex gap-2 items-center">
+            <p className=" text-lg font-semibold">{format.FormatNumber(resul.roomDTOs?.find((ob) => ob?.roomType === "SINGLE")?.pricePerNight)}</p>
+            <span className="font-semibold text-xs">VNđ/ Phòng</span>
+          </div>
           <button
             onClick={scrooltotop}
             className=" bg-cyan-500 text-white px-5 py-4 rounded-2xl

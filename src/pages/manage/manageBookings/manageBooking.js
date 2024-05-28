@@ -9,11 +9,9 @@ import DetailsBookings from "./detailsBooking";
 
 function ManagerBooking() {
 
-    const [isShowDetail, setIsShowDetail] = useState(false);
     const [bookings, setBookings] = useState([]);
-    const [detailBk, setDetailBk] = useState({});
     const [state, dispatch] = useStore();
-    const { isEdit, idEdit, getData } = state;
+    const { getData } = state;
 
     useEffect(() => {
         const CallData = () => {
@@ -29,7 +27,6 @@ function ManagerBooking() {
     useEffect(() => {
         setBookings(getData)
     }, [getData])
-    console.log(bookings)
 
     // Open Detail
 
@@ -43,7 +40,6 @@ function ManagerBooking() {
                             Danh sách khách hàng booking
                         </h4>
                     </div>
-
                 </div>
 
                 {bookings?.length === 0 ?
@@ -75,17 +71,6 @@ function ManagerBooking() {
                     </div>
                 }
 
-                {isShowDetail ?
-                    <div className="modal z-50">
-                        <div className="flex w-full h-full">
-                            <div id="overlay" className="modal_overlay"></div>
-                            <div className="modal_body">
-                                <DetailsBookings detail={detailBk} />
-                            </div>
-                        </div>
-                    </div>
-                    : null
-                }
             </div>
         </div>
     );

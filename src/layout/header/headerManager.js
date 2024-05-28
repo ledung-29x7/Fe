@@ -98,6 +98,7 @@ function HeaderManager() {
                         checkLoggedIn();
                         navigate("/")
                         dispatch(actions.CheckLogin(false))
+                        window.location.reload();
                     }
                 });
             } catch (error) {

@@ -254,15 +254,12 @@ function AddManagerHotel() {
 
     return (
         <div className="containerr">
-            <div className="px-10 my-7 flex justify-between w-full h-14 font-bold text-xl border-b border-b-slate-400 ">
+            <div className="px-10 my-7 flex justify-between w-full h-14 font-bold text-xl ">
                 <span>Thêm khách sạn</span>
-                <span onClick={HandleCloseEdit} className=" w-6 h-6 text-2xl text-slate-500 flex justify-center items-center text-center cursor-pointer "  >
-                    &times;
-                </span>
             </div>
             <div className=" px-10">
                 {/* title edit */}
-                <form onSubmit={handleSubmit} className=" my-10 flex flex-col gap-10">
+                <form onSubmit={handleSubmit} className=" flex flex-col gap-10">
                     {/* form edit */}
                     <div className=" flex flex-col gap-6">
                         <InputRoom

@@ -253,8 +253,8 @@ function AddManagerHotel() {
     }
 
     return (
-        <div className="containerr">
-            <div className="px-10 my-7 flex justify-between w-full h-14 font-bold text-xl ">
+        <div className="containerr bg-neutral-100 py-4 rounded-md">
+            <div className="px-10 my-7 text-blue-400 flex justify-between w-full h-14 font-bold text-xl ">
                 <span>Thêm khách sạn</span>
             </div>
             <div className=" px-10">
@@ -264,7 +264,7 @@ function AddManagerHotel() {
                     <div className=" flex flex-col gap-6">
                         <InputRoom
                             type={'text'}
-                            placeholder={"tên khách sạn"}
+                            placeholder={"Tên khách sạn"}
                             nameInput={"name"}
                             value={valueAdd?.name}
                             onChange={handleChange}
@@ -272,7 +272,7 @@ function AddManagerHotel() {
                         />
 
                         <InputRoom
-                            placeholder="số nhà/thôn/xóm"
+                            placeholder="Số nhà/thôn/xóm"
                             value={valueAdd?.addressDTO?.addressLine}
                             nameInput="addressDTO.addressLine"
                             onChange={handleChange}
@@ -281,7 +281,7 @@ function AddManagerHotel() {
                         />
 
                         <InputRoom
-                            placeholder="District"
+                            placeholder="Quận"
                             nameInput={"addressDTO.district"}
                             value={valueAdd?.addressDTO?.district}
                             onChange={handleChange}
@@ -290,7 +290,7 @@ function AddManagerHotel() {
                         />
 
                         <InputRoom
-                            placeholder="City"
+                            placeholder="Thành phố"
                             nameInput={"addressDTO.city"}
                             value={valueAdd?.addressDTO?.city}
                             onChange={handleChange}
@@ -299,7 +299,7 @@ function AddManagerHotel() {
                         />
 
                         <InputRoom
-                            placeholder="Country"
+                            placeholder="Quốc gia"
                             nameInput={"addressDTO.country"}
                             value={valueAdd?.addressDTO?.country}
                             onChange={handleChange}
@@ -307,18 +307,20 @@ function AddManagerHotel() {
                             type={"text"}
                         />
 
-                        <div className=" relative">
+                        <div className="sm:col-span-2 mt-2">
+                            <label className='flex text-sm font-semibold leading-6 text-gray-900'>
+                                Tiểu sử
+                                <p className=' text-red-500'>*</p>
+                            </label>
                             <textarea
-                                className="block w-full rounded-md outline-none border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                className="block w-full rounded-md outline-none border-0 mt-2 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                 name={"description"}
-                                rows={4}
+                                rows={5}
                                 value={valueAdd?.description}
                                 onChange={handleChange}
                                 placeholder={"Nhập nội dung"}
                             />
-                            <label className="absolute -top-1 left-4 bg-white px-2 -translate-y-1/2 text-[#475467] text-sm font-semibold">
-                                Description
-                            </label>
+
                         </div>
 
                     </div>

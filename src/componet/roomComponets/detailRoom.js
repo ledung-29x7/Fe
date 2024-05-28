@@ -77,7 +77,7 @@ function DetailRoom({ dataInfoRoom }) {
                         {dtDetail?.serviceDTOs?.length > 0 ?
                             <div className="grid grid-cols-2">
                             {dtDetail?.serviceDTOs?.map((servic)=>
-                                <IconNText icon="fa-solid fa-check" style={{ color: "#66d9ff", }} text={servic} />
+                                <IconNText icon="fa-solid fa-check" style={{ color: "#66d9ff", }} text={servic?.name} />
                             )}
                         </div>
                         :

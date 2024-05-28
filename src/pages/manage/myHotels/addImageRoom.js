@@ -103,7 +103,7 @@ function AddImageRoom() {
 
                                 <div className=" grid grid-cols-6 gap-1">
                                     {readerImg.map((img) =>
-                                        <img className=" m-3 w-40 h-40" src={img} alt="" />
+                                        <img className=" m-3 w-32 h-32" src={img} alt="" />
                                     )}
                                 </div>
                                 

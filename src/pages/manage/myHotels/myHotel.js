@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
 import * as apis from "../../../apis"
 import RowList from "./rowRoom";
-import Delete from "../../admins/listUser/Delete";
+import DeleteManager from "./DeleteManager";
 
 
 function ListUser() {
@@ -89,7 +89,7 @@ function ListUser() {
                     <div className="flex w-full h-full">
                         <div id="overlay" className="modal_overlay"></div>
                         <div className="modal_body">
-                            <Delete delet={isEdit} />
+                            <DeleteManager delet={isEdit} />
                         </div>
                     </div>
                 </div>

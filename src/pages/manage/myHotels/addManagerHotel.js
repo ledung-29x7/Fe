@@ -235,12 +235,11 @@ function AddManagerHotel() {
                 e.preventDefault();
                 await apis.AddManagerHotel(valueAdd)
                     .then(res => {
-                        console.log(res)
                         if (res.status === 201) {
                             return (
                                 navigate("/manager/myHotel/add/imagehotel"),
-                                dispatch(actions.ModalSuccsessfull(true)),
-                                sessionStorage.setItem("idHotel", res?.data?.id)
+                                sessionStorage.setItem("idHotel", res.data.id),
+                                dispatch(actions.ModalSuccsessfull(true))
                             )
                         }
                     });
@@ -285,7 +284,7 @@ function AddManagerHotel() {
                             nameInput={"addressDTO.district"}
                             value={valueAdd?.addressDTO?.district}
                             onChange={handleChange}
-                            titleInput={"district"}
+                            titleInput={"Quận"}
                             type={"text"}
                         />
 
@@ -294,7 +293,7 @@ function AddManagerHotel() {
                             nameInput={"addressDTO.city"}
                             value={valueAdd?.addressDTO?.city}
                             onChange={handleChange}
-                            titleInput={"City"}
+                            titleInput={"Thành phố"}
                             type={"text"}
                         />
 
@@ -303,7 +302,7 @@ function AddManagerHotel() {
                             nameInput={"addressDTO.country"}
                             value={valueAdd?.addressDTO?.country}
                             onChange={handleChange}
-                            titleInput={"Country"}
+                            titleInput={"Quốc giá"}
                             type={"text"}
                         />
 
@@ -328,16 +327,18 @@ function AddManagerHotel() {
                         {/* Single */}
                         <div>
                             <div className=" flex justify-around ">
-                                <input
-                                    className="outline-none pl-1 w-28"
-                                    type={"text"}
-                                    name={"roomType"}
-                                    value={"SINGLE"}
-                                    onChange={handleChangeRoomSing}
-                                />
+                                <div>
+                                    <input
+                                        className="outline-none text- w-20"
+                                        type={"text"}
+                                        name={"roomType"}
+                                        value={"SINGLE"}
+                                        onChange={handleChangeRoomSing}
+                                    />
+                                </div>
                                 <InputRoom
                                     type={"number"}
-                                    placeholder={"số phòng"}
+                                    placeholder={"Số phòng"}
                                     nameInput={"roomCount"}
                                     value={roomSing?.roomCount}
                                     onChange={handleChangeRoomSing}
@@ -345,17 +346,17 @@ function AddManagerHotel() {
                                 />
                                 <InputRoom
                                     type={"number"}
-                                    placeholder={"giá phòng"}
+                                    placeholder={"Giá phòng"}
                                     nameInput={"pricePerNight"}
                                     value={roomSing?.pricePerNight}
                                     onChange={handleChangeRoomSing}
-                                    titleInput={"Gía Phòng"}
+                                    titleInput={"Giá phòng"}
                                 />
 
                             </div>
 
                             <span>Dịch vụ Phòng</span>
-                            <div className=" grid grid-cols-5">
+                            <div className=" grid grid-cols-2 items-center">
                                 {service.map((serv) =>
                                     <CheckBox
 

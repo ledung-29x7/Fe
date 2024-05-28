@@ -99,7 +99,8 @@ function Room() {
         const dateout = new Date(checkout);
         const msin = datein.getTime();
         const msout = dateout.getTime();
-        const duration = Math.ceil((msout - msin) / (24 * 60 * 60 * 1000))
+        const duration = Math.ceil((msout - msin) / (24 * 60 * 60 * 1000));
+        const totalPrice = total * duration;
 
         if (countNType?.count > 0) {
             totalBooked.push(countNType)
@@ -117,7 +118,7 @@ function Room() {
             checkoutDate: checkout,
             durationDays: duration,
             roomSelections: totalBooked,
-            amount: total
+            amount: totalPrice
         }))
 
     }, [countNType, checkin, checkout, total])
